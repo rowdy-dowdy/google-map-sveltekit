@@ -3,8 +3,10 @@
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
   import gsap from "gsap"
+  import { map as mapStore } from "../../stores/map";
 
   import mapStyles from '$lib/map/mapStyles'; // optional
+  import { awaitMapAnimation } from "../../stores/app";
 
   export let globally = true;
   export let map: google.maps.Map
@@ -34,6 +36,7 @@
     };
 
     map = new google.maps.Map(container, {...cameraOptions, styles: mapStyles});
+    $mapStore = map
 
     dispatch("load", true);
     if (globally) {
@@ -41,18 +44,12 @@
     }
 
     // animation
-    let duration = 5;
-    
-    function animate(time?: any) {
-      if (time < duration * 1000)
-        window.requestAnimationFrame(animate);
-    }
+    let duration = 2;
 
     setTimeout(() => {
       gsap.to(cameraOptions, { 
-        zoom: 14, 
+        zoom: 13, 
         onUpdate: () => {
-          console.log(cameraOptions)
           let newVal = {
             // tilt: cameraOptions.tilt,
             // heading: cameraOptions.heading,
@@ -60,11 +57,12 @@
           }
           map.moveCamera(newVal);
         },
+        onComplete: () => {
+          $awaitMapAnimation = false;
+        },
         duration: duration,
         // ease: Circ.easeOut
       });
-
-      animate();
     }, 1000);
 
   }

@@ -1,4 +1,7 @@
 // See https://kit.svelte.dev/docs/types#app
+
+import type { InfoWindow } from "$lib/components/info_window";
+
 // for information about these interfaces
 declare global {
 	namespace App {
@@ -11,6 +14,9 @@ declare global {
     initMap: () => void;
     map: google.maps.Map,
   }
+  // interface HTMLElementTagNameMap {
+  //   "info-window": InfoWindow;
+  // }
 }
 
 export {};
