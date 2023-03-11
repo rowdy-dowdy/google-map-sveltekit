@@ -10,7 +10,7 @@
   export let map: google.maps.Map
 
   let src = "";
-  const key = "AIzaSyDaOulQACiJzBfqumbsqg_-vKha8fCnL-s";
+  const key = "AIzaSyDc7PnOq3Hxzq6dxeUVaY8WGLHIePl0swY";
 
   // @ts-ignore
   let container: HTMLElement;

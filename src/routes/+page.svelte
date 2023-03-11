@@ -9,7 +9,9 @@
 
 <div class="w-full h-full flex items-stretch">
   <div class="flex-none w-1/3">
-    <Control {map} />
+    {#if map}
+      <!-- <Control {map} /> -->
+    {/if}
   </div>
   <div class="flex-grow min-w-0">
     <Map 
