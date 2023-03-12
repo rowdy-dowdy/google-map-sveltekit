@@ -30,7 +30,7 @@ let places = [
       "https://services-ap1.arcgis.com/7uR9jgwLb9JgoSB0/arcgis/rest/services/DiemDuLich_BacHa_view/FeatureServer/0/71/attachments/3",
       "https://services-ap1.arcgis.com/7uR9jgwLb9JgoSB0/arcgis/rest/services/DiemDuLich_BacHa_view/FeatureServer/0/76/attachments/284"
     ],
-    position: { lat: 21.586593, lng: 105.831771 }
+    position: { lat: 21.586593, lng: 105.731771 }
   },
   {
     id: 4,

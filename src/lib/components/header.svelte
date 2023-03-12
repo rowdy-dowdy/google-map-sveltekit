@@ -3,6 +3,7 @@
 </script>
 
 <div class="sticky h-16 shadow bg-white z-50">
+  <slot/>
   <div class="w-full h-full flex items-center space-x-6 px-8">
     <a href="/" class="flex-none flex items-center space-x-1"
       ><img

@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
-  import gsap from "gsap"
+  import gsap, {Linear} from "gsap"
   import { map as mapStore } from "../../stores/map";
 
   import mapStyles from '$lib/map/mapStyles'; // optional
@@ -61,7 +61,7 @@
           $awaitMapAnimation = false;
         },
         duration: duration,
-        // ease: Circ.easeOut
+        ease: Linear.easeNone
       });
     }, 1000);
 

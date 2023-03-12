@@ -4,6 +4,10 @@
   import "../app.css";
   import type { LayoutData } from "./$types";
   import { addMapMaker } from "$lib/utils/utils";
+  import Loading from "$lib/components/loading.svelte";
+  import Alert from "$lib/components/alert.svelte";
+  import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
+  import 'simplebar/dist/simplebar.css';
 
   let map: google.maps.Map;
 
@@ -13,19 +17,19 @@
   $: if (map && !firstAddMapMaker) {
     addMapMaker(data.places)
   }
-
 </script>
-
-
 
 <div class="flex flex-col w-full h-full">
   <div class="flex-none w-full">
-    <Header />
+    <Header>
+      <Loading />
+    </Header>
   </div>
   <div class="flex-grow min-h-0">
-    <div class="w-full h-full flex items-stretch">
-      <div class="flex-none w-1/3 overflow-y-auto">
-        <div class="h-full px-4 py-6 bg-gray-100">
+    <div class="w-full h-full flex items-stretch overflow-hidden">
+      <!-- use simplebar -->
+      <div data-simplebar class="flex-none w-[500px] bg-gray-50">
+        <div class="px-4 py-6">
           {#if map}
             <slot />
           {/if}
@@ -43,6 +47,8 @@
     </div>
   </div>
 </div>
+
+<Alert />
 
 <style lang="postcss">
   :global(#app) {

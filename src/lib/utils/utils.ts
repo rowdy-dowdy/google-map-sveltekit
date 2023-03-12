@@ -1,7 +1,7 @@
 import { browser } from "$app/environment";
 import { map as mapStore } from "../../stores/map";
 import { get } from 'svelte/store';
-import gsap from "gsap"
+import gsap, {Linear} from "gsap"
 import "$lib/web_components/info_window";
 import { Zoom } from "swiper";
 
@@ -54,6 +54,7 @@ const moveMap = ({position, zoom = 14, duration = 1} : MoveMapOptionType) => {
       map.moveCamera({center: newVal, zoom: old.zoom});
     },
     duration: duration,
+    ease: Linear.easeNone
     // stagger: {
     //   amount: 3, 
     // }

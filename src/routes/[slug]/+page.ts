@@ -1,6 +1,10 @@
 import type { PageLoad } from "./$types"
-import { fail, redirect, error } from '@sveltejs/kit';
+import { fail, redirect, error,  } from '@sveltejs/kit';
 import places from "$lib/components/data";
+import { alertStore } from "../../stores/alert";
+import { get,  } from "svelte/store";
+import { browser } from "$app/environment";
+import { preloadData } from "$app/navigation";
 
 type PlaceType = {
   id: number;
@@ -14,10 +18,19 @@ type PlaceType = {
   };
 }
 
-export const load: PageLoad = async ({params}) => {
-  const placeIndex = places.findIndex(v => v.slug == params.slug)
+export const load: PageLoad = async (event) => {
+  const placeIndex = places.findIndex(v => v.slug == event.params.slug)
+  // await new Promise((res) => {
+  //   setTimeout(() => {
+  //     res(true)
+  //   }, 2000);
+  // })
 
   if (placeIndex < 0) {
+    alertStore.addAlert({
+      type: "error",
+      title: "Không tìm thấy địa điểm bạn yêu cầu"
+    })
     throw redirect(307, '/');
   }
 
