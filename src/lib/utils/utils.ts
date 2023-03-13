@@ -1,23 +1,46 @@
 import { browser } from "$app/environment";
-import { map as mapStore } from "../../stores/map";
+import { googleMapStore as mapStore } from "../../stores/map";
 import { get } from 'svelte/store';
 import gsap, {Linear} from "gsap"
 import "$lib/web_components/info_window";
 import { Zoom } from "swiper";
 
-const getLocation = () => {
-  return new Promise((res,rej) => {
-    if (!navigator.geolocation) rej("Geolocation is not supported by your browser")
+type GetLocationType = {
+  lat: number, 
+  lng: number
+} | null
 
-    navigator.geolocation.getCurrentPosition((position) => {
+const getLocation = (): GetLocationType => {
+  try {
+    if (!navigator.geolocation)
+      return null
+
+    new Promise((res,rej) => navigator.geolocation.getCurrentPosition(res,rej))
+    .then((position: any) => {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
 
-      res({ lat: latitude, lng: longitude})
+      return ({ lat: latitude, lng: longitude})
     })
+    .catch(_ => null)
+  } catch (error) {
+    return null
+  }
+  return null
+}
 
-    rej("Error")
-  })
+const getLocationPromise = async (): Promise<{lat: number, lng: number} | null> => {
+  let position = null
+  await new Promise((res,rej) => navigator.geolocation.getCurrentPosition(res,rej))
+    .then((p: any) => {
+      const latitude = p.coords.latitude;
+      const longitude = p.coords.longitude;
+
+      position =  { lat: latitude, lng: longitude}
+    })
+    .catch()
+
+  return position
 }
 
 type MoveMapOptionType = {
@@ -138,5 +161,6 @@ const addMapMaker = (places: PlaceType[]) => {
 export {
   getLocation,
   moveMap,
-  addMapMaker
+  addMapMaker,
+  getLocationPromise
 }

@@ -12,6 +12,13 @@ class InfoWindow extends LitElement {
         width: 100%;
         max-width: 300px;
         /* padding: 10px; */
+        /* width: 400px;
+        background: #fff;
+        padding: 10px;
+        max-height: 500px;
+        overflow-y: auto;
+        border-radius: 3px;
+        border: 1px solid #ccc; */
       }
     `,
     css`.shimmer {

@@ -56,7 +56,7 @@
     </div>
 
     <div class="!ml-auto">
-      <a href="/" class="btn btn-red !rounded-lg">Đăng nhập</a>
+      <a href="/auth/login" class="btn btn-red !rounded-lg">Đăng nhập</a>
     </div>
   </div>
 </div>

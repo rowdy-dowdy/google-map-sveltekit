@@ -3,11 +3,10 @@
   import gsap from "gsap"
   import "$lib/web_components/info_window";
   import type { PageData } from "./$types";
-  import { map } from "../stores/map";
   import { moveMap } from "$lib/utils/utils";
-  import { awaitMapAnimation } from "../stores/app";
+  import { awaitMapAnimation } from "../../stores/app";
   import LazyImage from "$lib/components/lazy_image.svelte";
-  export let data: PageData
+  export let data
 
   $: if(!$awaitMapAnimation) {
     moveMap({
@@ -15,8 +14,6 @@
       zoom: 13
     })
   }
-
-  
 
   onMount(() => {
     if (!$awaitMapAnimation)

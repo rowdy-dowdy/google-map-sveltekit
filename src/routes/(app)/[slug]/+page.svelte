@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
-  import { map } from "../../stores/map";
-  import { awaitMapAnimation } from "../../stores/app";
+  import { googleMapStore as map } from "../../../stores/map";
+  import { awaitMapAnimation } from "../../../stores/app";
   import type { PageData } from "./$types";
   import Swiper, { Parallax } from 'swiper';
   import "swiper/css";

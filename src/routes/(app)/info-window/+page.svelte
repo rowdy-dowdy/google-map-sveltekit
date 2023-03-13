@@ -1,6 +1,6 @@
 <script lang="ts">
   import "$lib/web_components/info_window";
-  import { alertStore } from "../../stores/alert";
+  import { alertStore } from "../../../stores/alert";
 
   let data = {
     title: "Chợ Phiên Bắc Hà",

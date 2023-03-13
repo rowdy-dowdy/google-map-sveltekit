@@ -6,6 +6,27 @@
   100% {-webkit-mask-position:left}
 }
 
+@layer base {
+  * {
+    @apply border-[#dcdce4];
+  }
+
+  input, select, textarea {
+    background: transparent;
+  }
+  input:focus, textarea:focus, a:focus {
+    outline: none;
+	}
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active{
+    /* -webkit-box-shadow: 0 0 0 30px white inset !important; */
+    transition: background-color 600000s 0s, color 600000s 0s;
+  } 
+}
+
 @layer components {
   .bg-full {
     @apply absolute w-full h-full top-0 left-0;

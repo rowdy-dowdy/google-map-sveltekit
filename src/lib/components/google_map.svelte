@@ -3,7 +3,7 @@
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
   import gsap, {Linear} from "gsap"
-  import { map as mapStore } from "../../stores/map";
+  import { googleMapStore as mapStore } from "../../stores/map";
 
   import mapStyles from '$lib/map/mapStyles'; // optional
   import { awaitMapAnimation } from "../../stores/app";
