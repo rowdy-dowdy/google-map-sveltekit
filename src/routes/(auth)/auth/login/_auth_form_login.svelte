@@ -1,14 +1,15 @@
 <script lang="ts" setup>
   import { Fetch } from "$lib/utils/fetch";
+  import { alertStore } from "../../../../stores/alert";
   import { authStore } from "../../../../stores/auth";
 
   let loading = false
   let error = ""
 
   const onSubmit = async (e: Event) => {
-    e.preventDefault();
+    if (loading) return
+
     try {
-      if (loading) return
       loading = true
       error = ""
       const { email, password } = Object.fromEntries(
@@ -17,7 +18,7 @@
 
       await new Promise(res => setTimeout(() => res(true), 1000))
 
-      const res = await Fetch("/api/login", {
+      const { user, token } = await Fetch("/api/login", {
         method: "post",
         body: JSON.stringify({
           email: email,
@@ -28,12 +29,16 @@
         },
       });
 
-      // const data = 
+      if (user && token) {
 
-      console.log({res})
+      }
+
     } catch (error) {
-      error = error
-      console.log({ error });
+      // console.log({ error });
+      alertStore.addAlert({
+        type: 'warning',
+        title: "Tài khoản hoặc mật khẩu của bạn không chính xác"
+      })
     } finally {
       loading = false
     }

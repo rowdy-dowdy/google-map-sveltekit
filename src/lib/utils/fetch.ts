@@ -3,7 +3,7 @@ import { authStore } from "../../stores/auth"
 
 const APP_URL = "http://192.168.1.7/example-app/public"
 
-const Fetch = (input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response> => {
+const Fetch = (input: RequestInfo | URL, init?: RequestInit | undefined): Promise<any> => {
   let auth = get(authStore)
 
   init = {
@@ -16,7 +16,12 @@ const Fetch = (input: RequestInfo | URL, init?: RequestInit | undefined): Promis
 
   return new Promise((res,rej) => {
     fetch(APP_URL + input, init)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          rej(res)
+        }
+        return res.json()
+      })
       .then(data => res(data))
       .catch(e => rej(e))
   })
